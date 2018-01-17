@@ -20,6 +20,17 @@ function get_image_code(){
 
 
 /****
+ * 时间戳转为 日期+时间
+ * @param unknown $date
+ * @return string
+ */
+function get_gate_time($date){
+	return date("Y-m-d H:i:s",$date);
+}
+
+
+
+/****
  *
  * 验证用户名
  * @param unknown 验证码

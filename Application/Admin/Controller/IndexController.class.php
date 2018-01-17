@@ -9,6 +9,9 @@ class IndexController extends BaseController{
 	
 	
 	function index(){
+		
+		$this->assign("adminusername",$_SESSION['xiaomiadminname']);
+		
 		$this->display();
 	}
 	
