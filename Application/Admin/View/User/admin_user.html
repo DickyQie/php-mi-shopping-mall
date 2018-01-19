@@ -21,7 +21,7 @@
 
 
 </style>
-<form class="form-inline definewidth m20" action="index.html" method="get">    
+<form class="form-inline definewidth m20" action="{:U('admin_user')}" method="post">    
     用户名称：
     <input type="text" name="username" id="username"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增用户</button>
@@ -44,34 +44,29 @@
             <td>{$item.email}</td>
             <td>{$item['last_login']|get_gate_time}</td>
             <td>
-                <a href="edit.html">编辑</a>                
+                <a class="confirm-delete" href="{:U('get_user_del',array('id'=>$item['user_id']))}">删除</a>&nbsp;&nbsp;       
+                <a href="{:U('get_user_edit')}">编辑</a>                
             </td>
         </tr>
        </foreach>
       
 </table>
-</block>
+
 <script>
     $(function () {
-        
-
 		$('#addnew').click(function(){
-
-				window.location.href="add.html";
-		 });
-
+			 window.location.href="{:U('add')}";
+		});
+		
 
     });
 
 	function del(id)
 	{
 		
-		
 		if(confirm("确定要删除吗？"))
 		{
-		
 			var url = "index.html";
-			
 			window.location.href=url;		
 		
 		}
@@ -81,3 +76,5 @@
 	
 	}
 </script>
+
+</block>

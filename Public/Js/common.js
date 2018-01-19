@@ -1,8 +1,8 @@
 /**
  * Created with JetBrains PhpStorm.
  * User: kk
- * Date: 13-8-28
- * Time: 下午4:44
+ * Date: 16-8-28
+ * Time: 下午6:16
  */
 function U() {
     var url = arguments[0] || [];
@@ -27,3 +27,26 @@ function U() {
 
     return _APP_+'?'+arr.join('&');
 }
+
+
+/****
+ *
+ */
+
+$(function(){
+	$('td .confirm-delete').click(function(){
+		var url = $(this).attr('href');
+        layer.confirm('确认要执行删除操作吗？',function(){
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(message){
+                    layer.msg(message,{time:2000},function(){
+                        window.location.reload();
+                    });
+                }
+            });
+        });
+        return false;
+	});
+});
