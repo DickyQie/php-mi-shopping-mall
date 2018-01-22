@@ -23,15 +23,22 @@
 <form action="{:U('add')}" method="post">
 <table class="table table-bordered table-hover definewidth m10">
     <tr>
-        <td width="10%" class="tableleft">类型名称</td>
-        <td><input type="text" name="type_name"/></td>
+        <td width="10%" class="tableleft">版本名称</td>
+        <td><input type="text" name="edition_name"/></td>
     </tr>
     <tr>
-        <td class="tableleft">状态</td>
+        <td width="tableleft" class="tableleft">商品类型</td>
         <td>
-            <input type="radio" name="status" value="1" checked/> 启用
-            <input type="radio" name="status" value="0"/> 禁用
+            <select name="type_id">
+            <foreach name='type' item="item">
+             <option value="{$item.id}">{$item.type_name}</option>
+            </foreach>
+            </select>
         </td>
+    </tr>
+    <tr>
+        <td width="10%" class="tableleft">版本描述</td>
+        <td><textarea rows="3" cols="30" name="edition_desc"></textarea></td>
     </tr>
     <tr>
         <td class="tableleft"></td>
@@ -48,9 +55,9 @@
 		 });
     });
     $("form").submit(function (){
-    	$typename=$("input[name='type_name']").val();
+    	$typename=$("input[name='edition_name']").val();
     	if(!$typename){
-    		layer.msg("类型不能为空",{time:1000});
+    		layer.msg("版本名称不能为空",{time:1000});
     		return false;
     	}
     });

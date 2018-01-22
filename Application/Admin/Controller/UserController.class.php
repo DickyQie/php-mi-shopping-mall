@@ -5,11 +5,15 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-
+/***
+ * 后台用户管理
+ * @author zhangqie
+ *
+ */
 class UserController extends BaseController{
 	
 	/***
-	 * 后台用户管理
+	 * 后台用户列表
 	 */
 	function admin_user() {
 		$key=I("username",'','trim');
@@ -19,8 +23,6 @@ class UserController extends BaseController{
 		$admin=M('admin_user')->where($map)->select();
 		$this->assign("adminuser",$admin);
 		$this->display();
-		//dump($admin);
-		
 	}
 	
 	
@@ -36,11 +38,6 @@ class UserController extends BaseController{
 			$data=I('post.');
 			$data['add_time']=time();
 			$data['password']=md5($data['user_name'].$data['password']);
-			
-			echo $data['password'];
-			echo "--".md5("admin123456");
-			dump($data);
-			exit();
 			$res=M('admin_user')->add($data);
 			if ($res){
 				$this->success("添加成功",U('admin_user'),1);
@@ -58,7 +55,20 @@ class UserController extends BaseController{
 	 * 修改管理员信息
 	 */
 	function get_user_edit(){
-		$this->display("edit");
+		if (IS_POST){
+			$post=I('post.');
+			$res=M('admin_user')->save($post);
+			if ($res){
+				$this->success("修改成功",U('admin_user'));
+			}else {
+				$this->error("修改失败");
+			}
+		}else {
+			$id=I("id");
+			$data=M('admin_user')->where('user_id='.$id)->find();
+			$this->assign('userdata',$data);
+			$this->display("edit");
+		}
 	}
 	
 	/****
@@ -73,6 +83,6 @@ class UserController extends BaseController{
 			$this->ajaxReturn("删除失败!");
 		}
 	}
-
+	
 	
 }

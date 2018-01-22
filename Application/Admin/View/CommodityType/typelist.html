@@ -18,9 +18,9 @@
 </style>
 <extend name="Common/common" />
 <block name="main">
-<form class="form-inline definewidth m20" action="index.html" method="get">  
+<form class="form-inline definewidth m20" action="{:U('typelist')}" method="get">  
    类型名称：
-    <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <input type="text" name="typename" id="typename"class="abc input-default" placeholder="输入商品类型关键字" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增类型</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" >
@@ -30,39 +30,30 @@
         <th>类型名称</th>
         <th>上传用户</th>
         <th>上传时间</th>
+        <th>使用状态</th>
         <th>管理操作</th>
     </tr>
     </thead>
+    <foreach name='datalist' item='item'>
 	<tr>
-       <td>1</td>
-       <td>管理员</td>
-       <td>admin</td>
-       <td>2018-11-12</td>
+       <td>{$item.id}</td>
+       <td>{$item.type_name}</td>
+       <td>{$item['admin_id']|get_admin_name}</td>
+       <td>{$item.upload_time}</td>
        <td>
-       		<a href="edit.html">编辑</a>&nbsp;&nbsp;&nbsp;
-       		<a href="edit.html">删除</a>
+       		<if condition="$item.status eq 1">启用
+       		<else/>禁用
+       		</if>
+       </td>
+       <td>
+       		<a href="{:U('get_type_edit',array('id'=>$item['id']))}">编辑</a>&nbsp;&nbsp;&nbsp;
+       		<a class="confirm-delete" href="{:U('get_type_delete',array('id'=>$item['id']))}">删除</a>
        </td>
      </tr>
-     <tr>
-       <td>2</td>
-       <td>管理员</td>
-       <td>admin</td>
-       <td>2018-11-12</td>
-       <td>
-       		<a href="edit.html">编辑</a>&nbsp;&nbsp;&nbsp;
-       		<a href="edit.html">删除</a>
-       </td>
-     </tr>
-    
-     
-     
-     
-     
+    </foreach>
 </table>
 <div class="inline pull-right page">
-         10122 条记录 <a href='#'>首页</a>     
-         	
-         <a href='#' >尾页</a> 
+         {$page}   
 </div>
 
 <script>

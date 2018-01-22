@@ -5,7 +5,7 @@ namespace Admin\Controller;
 use Think\Controller;
 
 /***
- * 后台
+ * 后台登录
  * @author zhangqie
  *
  */
@@ -35,7 +35,7 @@ class LoginController extends Controller{
 		if (IS_POST){
 			$code=I('code',' ','trim');
 			$username = I('username',' ','trim');
-			$password = I("password",' ','md5'); 
+			$password = I("password",' ','trim'); 
 			if (!checkLoginCode($code)){
 				$res['status']=0;
 				$res['message']="验证码输入有误";
@@ -70,7 +70,8 @@ class LoginController extends Controller{
 	function checkPassword($user,$pwd) {
 		$map['user_name']=$user;
 		$admin=M('admin_user')->where($map)->find();
-		if($pwd === $admin['password']){
+		$ampwd=md5($user.$pwd);
+		if($ampwd === $admin['password']){
 			return $admin;
 		}else {
 			return false;

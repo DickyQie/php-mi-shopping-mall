@@ -1,0 +1,72 @@
+<extend name="Common/common" />
+<block name="main">
+	<style type="text/css">
+	    body {
+	        padding-bottom: 40px;
+	    }
+	    .sidebar-nav {
+	        padding: 9px 0;
+	    }
+	
+	    @media (max-width: 980px) {
+	        /* Enable use of floated navbar text */
+	        .navbar-text.pull-right {
+	            float: none;
+	            padding-left: 5px;
+	            padding-right: 5px;
+	        }
+	    }
+	
+	
+	</style>
+<form action="{:U('get_type_edit')}" method="post" class="definewidth m20">
+<input type="hidden" name="id" value="{$data.type_id}" />
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">类型名称</td>
+            <td><input type="text" name="edition_name" value="{$data.edition_name}"/></td>
+        </tr>
+        <tr>
+        <td width="tableleft" class="tableleft">商品类型</td>
+        <td>
+            <select name="type_id">
+            <foreach name='type' item="item">
+             <option value="{$item.id}" <if condition="($item.id eq $data['type_id'])"> selected </if>>{$item.type_name}</option>
+            </foreach>
+            </select>
+        </td>
+    	</tr>
+   		 <tr>
+	        <td width="10%" class="tableleft">版本描述</td>
+	        <td><textarea rows="3" cols="30" name="edition_desc">{$data.edition_desc}</textarea></td>
+	    </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" type="button">保存</button>				 &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {       
+		$('#backid').click(function(){
+				window.history.back();
+		 });
+
+    });
+    
+    $("form").submit(function(){
+    	var type_name=$("input[name='type_name']").val();
+    	if(!type_name){
+    		layer.msg("商品类型不能为空!",{time:2000});
+    		return false;
+    	}
+    	
+    });
+    	
+    
+</script>
+</block>

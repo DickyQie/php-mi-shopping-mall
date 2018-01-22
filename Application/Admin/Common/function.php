@@ -14,8 +14,27 @@ function get_image_code(){
 			'useNoise' => true,
 			'codeSet' => '0123456789'
 	);
-	return $config;
-	
+	return $config;	
+}
+
+/****
+ * 获取用户名
+ * @param unknown $admin_id
+ * @return Ambigous <>
+ */
+function get_admin_name($admin_id){
+	$adminname=M('admin_user')->field('user_name')->where('user_id='.$admin_id)->find();
+	return $adminname['user_name'];
+}
+
+/***
+ * 获取商品类型名称
+ * @param unknown $typeid
+ * @return Ambigous <mixed, boolean, NULL, string, unknown, multitype:, object>
+ */
+function function_goods_type_name($typeid) {
+	$res=M('commodity_type')->field('type_name')->where('id='.$typeid)->find();
+	return $res['type_name'];		
 }
 
 
@@ -32,7 +51,7 @@ function get_gate_time($date){
 
 /****
  *
- * 验证用户名
+ * 验证验证码
  * @param unknown 验证码
  */
 function checkLoginCode($code){
