@@ -19,7 +19,7 @@
 	
 	
 	</style>
-<form action="{:U('get_type_edit')}" method="post" class="definewidth m20">
+<form action="{:U('get_edition_edit')}" method="post" class="definewidth m20">
 <input type="hidden" name="id" value="{$data.type_id}" />
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
@@ -59,9 +59,9 @@
     });
     
     $("form").submit(function(){
-    	var type_name=$("input[name='type_name']").val();
+    	var type_name=$("input[name='edition_name']").val();
     	if(!type_name){
-    		layer.msg("商品类型不能为空!",{time:2000});
+    		layer.msg("版本名称不能为空!",{time:2000});
     		return false;
     	}
     	

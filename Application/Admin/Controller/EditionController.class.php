@@ -36,6 +36,7 @@ class EditionController extends BaseController{
 		$this->display();	
 	}
 	
+	
 	/***
 	 * 添加版本
 	 */
@@ -61,7 +62,14 @@ class EditionController extends BaseController{
 	 */
 	function get_edition_edit(){
 		if (IS_POST){
-			$post['admin_id']=$_SESSION['xiaomiadminid'];//修改用户
+			$post=I('post.');
+			$post['user_id']=$_SESSION['xiaomiadminid'];//修改用户
+			$res=$this->model->model_update($post);
+			if ($res){
+				$this->success("修改成功!",U('index'));
+			}else {
+				$this->error("修改失败!");
+			}
 		}else {
 			$id=I('id');
 			$data=$this->model->model_query_find($id);
@@ -72,7 +80,18 @@ class EditionController extends BaseController{
 		}
 	}
 	
-	
-	
-	
+	/***
+	 * 删除单条数据
+	 */
+	function get_edition_delete() {
+		$id=I('id');
+		$res=$this->model->model_delete($id);
+		if ($res){
+			$this->ajaxReturn("删除成功");
+		}else {
+			$this->ajaxReturn("删除失败");
+		}
+	}
+		
 }
+

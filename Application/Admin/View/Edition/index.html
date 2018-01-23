@@ -47,7 +47,7 @@
             <td><empty name="item.edition_desc">暂无描述</empty>{$item.edition_desc}</td>
             <td>
                  <a href="{:U('get_edition_edit',array('id'=>$item['id']))}">编辑</a>&nbsp;&nbsp;       
-                 <a class="confirm-delete" href="{:U('get_user_del',array('id'=>$item['user_id']))}">删除</a>     
+                 <a class="confirm-delete" href="{:U('get_edition_delete',array('id'=>$item['id']))}">删除</a>     
             </td>
         </tr>
       </foreach>
