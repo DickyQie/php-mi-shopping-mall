@@ -24,4 +24,17 @@ class ListGoodsController extends BaseController{
 	
 	
 	
+	function add() {
+		$this->display();
+	}
+	
+	
+	function get_edition_edit() {
+		if (IS_POST){
+			
+		}else {
+			$this->display('edit');
+		}
+	}
+	
 }

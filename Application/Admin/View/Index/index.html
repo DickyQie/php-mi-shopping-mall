@@ -18,7 +18,7 @@
         <img src="__PUBLIC__/assets/img/top.png">
     </div>
 
-    <div class="dl-log">欢迎您1，<span class="dl-log-user">{$adminusername}</span><a href="{:U('Login/logout')}" title="退出系统" class="dl-log-quit">[退出]</a>
+    <div class="dl-log">欢迎您，<span class="dl-log-user">{$adminusername}</span><a href="{:U('Login/logout')}" title="退出系统" class="dl-log-quit">[退出]</a>
     </div>
 </div>
 <div class="content">
@@ -41,9 +41,9 @@
     BUI.use('common/main',function(){
         var config = 
         	[{id:'1',menu:[{text:'商品管理',
-        					items:[{id:'1',text:'商品列表',href:'/php/WxShop/wshop2/index.php/Admin/User/user.html'},
-				        	       {id:'2',text:'商品分类',href:"{:U('user')}"},
-				        	       {id:'3',text:'商品品牌',href:"{:U('User/index')}"},
+        					items:[{id:'1',text:'商品列表',href:"{:U('ListGoods/index')}"},
+				        	       {id:'2',text:'商品分类',href:"{:U('CommodityType/typelist')}"},
+				        	       {id:'3',text:'商品版本',href:"{:U('Edition/index')}"},
 				        	       {id:'4',text:'商品类型',href:'Menu/index.html'}]},
 				        	       
 				           {text:'系统管理',
@@ -53,12 +53,22 @@
 				        	       {id:'8',text:'菜单管理',href:'Menu/index.html'}]}
 				        	       ]},
              {id:'7',homePage : '9',menu:[{text:'订单管理',
-            	 			items:[{id:'9',text:'查询业务',href:"{:U('User/user')}"},
-            	 			       {id:'6',text:'角色管理',href:'Role/index.html'},
-				        	       {id:'7',text:'用户管理',href:'User/index.html'},
-				        	       {id:'8',text:'菜单管理',href:'Menu/index.html'}
+            	 			items:[{id:'9',text:'订单列表',href:"{:U('ListGoods/index')}"},
+            	 			       {id:'10',text:'角色管理',href:"{:U('User/admin_user')}"},
+				        	       {id:'11',text:'用户管理',href:'User/index.html'},
+				        	       {id:'12',text:'菜单管理',href:"{:U('User/admin_user')}"}
             	 			       
-            	 			       ]}]}];
+            	 			       ]},
+            	 			      {text:'用户管理',
+                       	 			items:[{id:'13',text:'用户列表',href:"{:U('ListGoods/index')}"},
+                       	 			       {id:'14',text:'地址管理',href:"{:U('User/admin_user')}"},
+           				        	       {id:'15',text:'用户管理',href:'User/index.html'},
+           				        	       {id:'16',text:'菜单管理',href:"{:U('User/admin_user')}"}
+                       	 			       
+                       	 			       ]}
+            	 			       ]
+				        	       
+             }];
         
         
         new PageUtil.MainPage({

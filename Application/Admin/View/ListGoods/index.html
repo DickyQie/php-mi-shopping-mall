@@ -53,8 +53,10 @@
        <td>1</td>
         <td>管理员</td>
        <td>1</td>
-        <td>管理员</td>
-       <td><a href="edit.html">编辑</a></td>
+       <td>管理员</td>
+       <td><a href="{:U('get_edition_edit',array('id'=>$item['id']))}">编辑</a>&nbsp;&nbsp;       
+           <a class="confirm-delete" href="{:U('get_edition_delete',array('id'=>$item['id']))}">删除</a>   
+       </td>
      </tr>
 
      
@@ -64,33 +66,12 @@
 </table>
 <div class="inline pull-right page">
          10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
-</block>
+
 <script>
     $(function () {
-        
 		$('#addnew').click(function(){
-
-				window.location.href="{:U('Index/user')}";
+				window.location.href="{:U('add')}";
 		 });
-
-
     });
-
-	function del(id)
-	{
-		
-		
-		if(confirm("确定要删除吗？"))
-		{
-		
-			var url = "index.html";
-			
-			window.location.href=url;		
-		
-		}
-	
-	
-	
-	
-	}
 </script>
+</block>
