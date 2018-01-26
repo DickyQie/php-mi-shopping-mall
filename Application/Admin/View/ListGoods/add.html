@@ -20,16 +20,17 @@
 
    </style>
 
-<form action="{:U('add')}" method="post">
+<form action="{:U('add')}" method="post" enctype="multipart/form-data">
 <table class="table table-bordered table-hover definewidth m10">
     <tr>
-        <td width="10%" class="tableleft">版本名称</td>
-        <td><input type="text" name="edition_name"/></td>
+        <td width="10%" class="tableleft">商品名称</td>
+        <td><input type="text" name="goods_name" placeholder="请输入商品名称"/></td>
     </tr>
     <tr>
-        <td width="tableleft" class="tableleft">商品类型</td>
+        <td width="	" class="tableleft" >商品类型</td>
         <td>
-            <select name="type_id">
+            <select name="type_id" id="type_id" onchange="get_elementary_info()">
+            <option value="0">请选择商品类型</option>
             <foreach name='type' item="item">
              <option value="{$item.id}">{$item.type_name}</option>
             </foreach>
@@ -37,15 +38,65 @@
         </td>
     </tr>
     <tr>
-        <td width="10%" class="tableleft">版本描述</td>
-        <td><textarea rows="3" cols="30" name="edition_desc"></textarea></td>
+        <td width="tableleft" class="tableleft" >商品价格</td>
+        <td><input type="text" name="goods_price" placeholder="请输入价格"/></td>
     </tr>
+    
+     <tr>
+        <td width="tableleft" class="tableleft">版本类型</td>
+        <td>
+            <select name="edition_id" id="edition_id">
+             <option value="0">请选择版本类型</option>
+            <foreach name='edition' item="item">
+             <option value="{$item.id}">{$item.edition_name}</option>
+            </foreach>
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+        <td width="tableleft" class="tableleft">库存</td>
+        <td><input type="number" name="stock" placeholder="请输入库存"/></td>
+    </tr>
+    
+     <tr>
+        <td width="tableleft" class="tableleft">已售</td>
+        <td><input type="number" name="sold" placeholder="请输入已售数量"/></td>
+    </tr>
+    
+    <tr>
+        <td width="tableleft" class="tableleft">折扣</td>
+        <td><input type="text" runat="server" name="discount" placeholder="请输入折扣 (5-10)" precision="2"/></td>
+    </tr>
+    
+     <tr>
+        <td width="tableleft" class="tableleft">图片</td>
+        <td><input type="file" name="goods_image"/></td>
+    </tr>
+    
+     <tr>
+        <td class="tableleft">是否推荐</td>
+        <td>
+            <input type="radio" name="goods_recommend" value="1"/> 是
+            <input type="radio" name="goods_recommend" value="0" checked/> 否
+        </td>
+    </tr>
+    
+    <tr>
+        <td width="10%" class="tableleft">描述信息</td>
+        <td><textarea rows="3" cols="30" name="goods_desc"></textarea></td>
+    </tr>
+    
+    
+    
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            <button type="submit" class="btn btn-primary" type="button">添加商品</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
         </td>
     </tr>
+    
+    
 </table>
 </form>
 <script>
@@ -54,12 +105,67 @@
 				window.history.back();
 		 });
     });
+    
+    
+    function get_elementary_info(){
+        var type_id = $('#type_id').val();
+        $.ajax({
+            type:"POST",
+            url:"{:U('get_edition_info')}",
+            data:{'type_id':type_id},
+            datatype:"text",
+            success:function(data){
+                if(data != ''){
+                    $('#edition_id').show();
+                    $('#edition_id').empty();
+                    $('#edition_id').append(data);
+                }else{
+                    $('#edition_id').hide();
+                    $('#edition_id').empty();
+                }
+            }
+        });
+    }
+    
     $("form").submit(function (){
-    	$typename=$("input[name='edition_name']").val();
-    	if(!$typename){
-    		layer.msg("版本名称不能为空",{time:1000});
+    	var goods_name=$("input[name='goods_name']").val();
+    	if(!goods_name){
+    		layer.msg("请输入商品名称",{time:1000});
     		return false;
     	}
+    	var type_id=$("#type_id").val();
+    	if(type_id =='0'){
+    		layer.msg("选择商品类型", {time:1000});
+    		return false;
+    	}
+    	var goods_price=$("input[name='goods_price']").val();
+    	if(!goods_price){
+    		layer.msg("输入商品价格",{time:1000});
+    		return false;
+    	}
+    	var edition_id=$("#edition_id").val();
+    	if(edition_id == '0'){
+    		layer.msg("请选择版本类型",{time:1000});
+    		return false;
+    	}
+    	var stock=$("input[name='stock']").val();
+    	if(!stock){
+    		layer.msg("请输入库存",{time:1000});
+    		return false;
+    	}
+    	var sold=$("input[name='sold']").val();
+    	if(!sold){
+    		layer.msg("请输入销量",{time:1000});
+    		return false;
+    	}
+    	var discount=$("input[name='discount']").val();
+    	if(!discount){
+    		layer.msg("请输入折扣",{time:1000});
+    		return false;
+    	}
+    	
     });
+    
+    
 </script>
 </block>

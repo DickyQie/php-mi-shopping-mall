@@ -12,6 +12,7 @@
              float: none;
              padding-left: 5px;
              padding-right: 5px;
+             height: 100px;
          }
      }
 
@@ -20,13 +21,14 @@
 <block name="main">
 <form class="form-inline definewidth m20" action="index.html" method="get">  
     机构名称：
-    <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
-    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增机构</button>
+    <input type="text" name="goodsname" id="goodsname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">添加商品</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
         <th>商品编号</th>
+        <th>商品货号</th>
         <th>商品名称</th>
         <th>商品类型</th>
         <th>商品价格</th>
@@ -37,35 +39,30 @@
         <th>积分</th>
         <th>上传日期</th>
         <th>是否推荐</th>
-        <th>描述信息</th>
         <th>管理操作</th>
     </tr>
     </thead>
-	<tr>
-       <td>1</td>
-       <td>管理员</td>
-       <td>1</td>
-        <td>管理员</td>
-       <td>1</td>
-        <td>管理员</td>
-       <td>1</td>
-        <td>管理员</td>
-       <td>1</td>
-        <td>管理员</td>
-       <td>1</td>
-       <td>管理员</td>
+    <foreach name="data" item="item">
+    	<tr>
+       <td>{$item.goods_id}</td>
+       <td>{$item.goods_sn}</td>
+       <td>{$item.goods_name}</td>
+       <td>{$item['type_id']|function_goods_type_name}</td>
+       <td>￥{$item.goods_price}</td>
+       <td>{$item['user_id']|get_admin_name}</td>
+       <td>{$item.stock}</td>
+       <td>{$item.sold}</td>
+       <td>{$item.discount}</td>
+       <td>{$item.integral}</td>
+       <td>{$item.upload_date}</td>
+       <td><if condition="($item.goods_recommend eq 1)">是<else/>否</if></td>
        <td><a href="{:U('get_edition_edit',array('id'=>$item['id']))}">编辑</a>&nbsp;&nbsp;       
            <a class="confirm-delete" href="{:U('get_edition_delete',array('id'=>$item['id']))}">删除</a>   
        </td>
      </tr>
-
-     
-     
-     
-     
+    </foreach>
 </table>
-<div class="inline pull-right page">
-         10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
+<div class="inline pull-right page" style="height:100px;"> {$page}</div>
 
 <script>
     $(function () {

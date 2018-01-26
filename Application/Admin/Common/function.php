@@ -48,15 +48,47 @@ function get_gate_time($date){
 }
 
 
+function function_goods_no($id) {
+	$length=strlen($id);
+	$goods_no="ZQ000000";
+	$goods_no=substr($goods_no, 0,(8-$length));
+	$goods_no=$goods_no.$id;
+	return $goods_no;
+}
 
 /****
- *
- * 验证验证码
- * @param unknown 验证码
+ * 计算商品积分
+ * @param unknown $price
+ * @param unknown $zcod
+ * @return number
  */
-function checkLoginCode($code){
-	$virfy=new \Think\Verify();
-	return $virfy->check($code,"imgcode");
+function function_goods_integral($price,$zcod){
+	return round($price/10*$zcod/100);
+}
+
+/****
+ * 计算商品折扣价格
+ * @param unknown $price
+ * @param unknown $zcod
+ * @return number
+ */
+function function_goods_discount($price,$zcod){
+	return number_format($price/10*$zcod,2,".","");
+}
+
+/***
+ * 查询某表的最后一条数据
+ * @param unknown $tablename
+ * @param unknown $array
+ * @return unknown|multitype:
+ */
+function function_last_one($tablename,$array){
+	$res=M($tablename)->field($array)->order($array[0]." desc")->find();
+	if ($res) {
+		return $res;
+	}else {
+		return array();
+	}
 }
 
 
