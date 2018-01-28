@@ -44,22 +44,22 @@
     </thead>
     <foreach name="data" item="item">
     	<tr>
-       <td>{$item.goods_id}</td>
-       <td>{$item.goods_sn}</td>
-       <td>{$item.goods_name}</td>
-       <td>{$item['type_id']|function_goods_type_name}</td>
-       <td>￥{$item.goods_price}</td>
-       <td>{$item['user_id']|get_admin_name}</td>
-       <td>{$item.stock}</td>
-       <td>{$item.sold}</td>
-       <td>{$item.discount}</td>
-       <td>{$item.integral}</td>
-       <td>{$item.upload_date}</td>
-       <td><if condition="($item.goods_recommend eq 1)">是<else/>否</if></td>
-       <td><a href="{:U('get_edition_edit',array('id'=>$item['id']))}">编辑</a>&nbsp;&nbsp;       
-           <a class="confirm-delete" href="{:U('get_edition_delete',array('id'=>$item['id']))}">删除</a>   
-       </td>
-     </tr>
+	       <td>{$item.goods_id}</td>
+	       <td>{$item.goods_sn}</td>
+	       <td>{$item.goods_name}</td>
+	       <td>{$item['type_id']|function_goods_type_name}</td>
+	       <td>￥{$item.goods_price}</td>
+	       <td>{$item['user_id']|get_admin_name}</td>
+	       <td>{$item.stock}</td>
+	       <td>{$item.sold}</td>
+	       <td>{$item.discount}</td>
+	       <td>{$item.integral}</td>
+	       <td>{$item.upload_date}</td>
+	       <td><if condition="($item.goods_recommend eq 1)">是<else/>否</if></td>
+	       <td><a href="{:U('get_edition_edit',array('id'=>$item['id']))}">编辑</a>&nbsp;&nbsp;       
+	           <a class="confirm-delete" href="{:U('get_edition_delete',array('id'=>$item['id']))}">删除</a>   
+	       </td>
+      </tr>
     </foreach>
 </table>
 <div class="inline pull-right page" style="height:100px;"> {$page}</div>

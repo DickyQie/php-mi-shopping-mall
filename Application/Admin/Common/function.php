@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 /****
  * 验证码 设置
  * @return multitype:number string boolean
@@ -16,6 +19,18 @@ function get_image_code(){
 	);
 	return $config;	
 }
+
+
+/****
+ *
+ * 验证用户名
+ * @param unknown 验证码
+ */
+function checkLoginCode($code){
+	$virfy=new \Think\Verify();
+	return $virfy->check($code,"imgcode");
+}
+
 
 /****
  * 获取用户名

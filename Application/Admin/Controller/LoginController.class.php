@@ -62,6 +62,15 @@ class LoginController extends Controller{
 	}
 	
 	
+	
+	/***
+	 * 验证验证码是否正确
+	 * @param unknown $param
+	 */
+	function checkLoginCoden($param) {
+		$virfy=new \Think\Verify();
+		return $virfy->check($param,'imgcode');
+	}
 
 	/**
 	 * 验证密码

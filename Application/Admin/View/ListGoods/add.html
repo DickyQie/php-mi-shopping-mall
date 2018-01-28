@@ -45,7 +45,7 @@
      <tr>
         <td width="tableleft" class="tableleft">版本类型</td>
         <td>
-            <select name="edition_id" id="edition_id">
+            <select multiple="multiple" name="edition_id[]" id="edition_id">
              <option value="0">请选择版本类型</option>
             <foreach name='edition' item="item">
              <option value="{$item.id}">{$item.edition_name}</option>

@@ -45,6 +45,10 @@ class ListGoodsController extends BaseController{
 	function add() {
 		if (IS_POST){
 			$post=I("post.");
+			$post['edition_id']=implode(",", $post['edition_id']);
+			//echo implode(",", $post['edition_id']);
+			//dump($post);
+			
 			if($_FILES['goods_image']['tmp_name']){
 				$info  = $this->image_load();
 
@@ -94,6 +98,16 @@ class ListGoodsController extends BaseController{
 			$this->display();
 		}
 	}
+	
+	
+	function showm(){	
+		$map['id']=array("in","1,2");
+		dump($map);
+		$data=M('edition')->where($map)->select();
+		dump($data);
+	}
+	
+	
 	
 	
 	function get_edition_edit() {
