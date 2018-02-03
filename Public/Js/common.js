@@ -41,7 +41,7 @@ $(function(){
                 type: "GET",
                 url: url,
                 success: function(message){
-                    layer.msg(message,{time:2000},function(){
+                    layer.msg(message,{time:1000},function(){
                         window.location.reload();
                     });
                 }
